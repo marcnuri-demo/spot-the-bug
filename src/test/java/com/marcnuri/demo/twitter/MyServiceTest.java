@@ -38,4 +38,20 @@ class MyServiceTest {
     assertThat(result).hasSize(3).extracting("name")
       .containsExactlyInAnyOrder("John Malkovich", "John Malkovich", "Michael J. Fox");
   }
+
+  @Test
+  @DisplayName("retrieveIndividualSignatures, with null entries, should return a set of distinct non-null signatures")
+  void retrieveIndividualSignaturesShouldFilterNull() {
+    final List<Signature> rawSignatures = Arrays.asList(
+      null, null, null,
+      aSignature().withName("John Malkovich").withDate(LocalDate.of(1953, Month.DECEMBER, 9)).withCity("L.A.").withCountry("USA").build(),
+      null,
+      aSignature().withName("Michael J. Fox").withDate(LocalDate.of(1961, Month.JUNE, 9)).withCountry("USA").build()
+    );
+
+    final Set<Signature> result = retrieveIndividualSignatures(rawSignatures);
+
+    assertThat(result).hasSize(2).extracting("name")
+      .containsExactlyInAnyOrder("John Malkovich", "Michael J. Fox");
+  }
 }
