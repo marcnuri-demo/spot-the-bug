@@ -30,13 +30,15 @@ class MyServiceTest {
       aSignature().withName("John Malkovich").withDate(LocalDate.of(1953, Month.DECEMBER, 9)).withCity("L.A.").withCountry("USA").build(),
       aSignature().withName("John Malkovich").withDate(LocalDate.of(1953, Month.DECEMBER, 9)).withCity("L.A.").withCountry("USA").build(),
       aSignature().withName("John Malkovich").withDate(LocalDate.of(1953, Month.DECEMBER, 9)).withCity("L.A.").withCountry("USSR").build(),
-      aSignature().withName("Michael J. Fox").withDate(LocalDate.of(1961, Month.JUNE, 9)).withCountry("USA").build()
+      aSignature().withName("Michael J. Fox").withAlias("Marty").withDate(LocalDate.of(1961, Month.JUNE, 9)).withCountry("USA").build(),
+      aSignature().withName("Jeff Bridges").withDate(LocalDate.of(1949, Month.DECEMBER, 4)).withCountry("USA").build(),
+      aSignature().withName("Jeff Bridges").withAlias("The Dude").withDate(LocalDate.of(1949, Month.DECEMBER, 4)).withCountry("USA").build()
     );
 
     final Set<Signature> result = retrieveIndividualSignatures(rawSignatures);
 
-    assertThat(result).hasSize(3).extracting("name")
-      .containsExactlyInAnyOrder("John Malkovich", "John Malkovich", "Michael J. Fox");
+    assertThat(result).hasSize(5).extracting("name")
+      .containsExactlyInAnyOrder("John Malkovich", "John Malkovich", "Michael J. Fox", "Jeff Bridges", "Jeff Bridges");
   }
 
   @Test

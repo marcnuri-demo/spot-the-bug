@@ -7,6 +7,7 @@ public class Signature {
 
   private LocalDate date;
   private String name;
+  private String alias;
   private String city;
   private String country;
 
@@ -24,6 +25,14 @@ public class Signature {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getAlias() {
+    return alias;
+  }
+
+  public void setAlias(String alias) {
+    this.alias = alias;
   }
 
   public String getCity() {
@@ -47,17 +56,18 @@ public class Signature {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Signature signature = (Signature) o;
-    return Objects.equals(date, signature.date) && Objects.equals(name, signature.name) && Objects.equals(city, signature.city) && Objects.equals(country, signature.country);
+    return Objects.equals(date, signature.date) && Objects.equals(name, signature.name) && Objects.equals(alias, signature.alias) && Objects.equals(country, signature.country);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(date, name, city, country);
+    return Objects.hash(date, name, alias,  country);
   }
 
   public static final class SignatureBuilder {
     private LocalDate date;
     private String name;
+    private String alias;
     private String city;
     private String country;
 
@@ -78,6 +88,11 @@ public class Signature {
       return this;
     }
 
+    public SignatureBuilder withAlias(String alias) {
+      this.alias = alias;
+      return this;
+    }
+
     public SignatureBuilder withCity(String city) {
       this.city = city;
       return this;
@@ -92,6 +107,7 @@ public class Signature {
       Signature signature = new Signature();
       signature.setDate(date);
       signature.setName(name);
+      signature.setAlias(alias);
       signature.setCity(city);
       signature.setCountry(country);
       return signature;
